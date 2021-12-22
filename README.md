@@ -1,4 +1,4 @@
-# http_teste
+# App para despesas Pessoais
 
 A new Flutter project.
 
