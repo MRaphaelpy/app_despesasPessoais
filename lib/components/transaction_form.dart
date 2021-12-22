@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:http_teste/models/transaction.dart';
 
-class TransactionForm extends StatefulWidget {
-  const TransactionForm({Key? key}) : super(key: key);
-
-  @override
-  _TransactionFormState createState() => _TransactionFormState();
-}
-
-class _TransactionFormState extends State<TransactionForm> {
+class TransactionForm extends StatelessWidget {
+  
   final TextEditingController titlecontroller = TextEditingController();
 
   final TextEditingController valuecontroller = TextEditingController();
+
+  final void Function(String, double) onSubmit;
+
+  TransactionForm(this.onSubmit);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +38,9 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             FlatButton(
               onPressed: () {
-                print(titlecontroller.text);
-                print(valuecontroller.text);
+                final title = titlecontroller.text;
+                final value = double.tryParse(valuecontroller.text) ?? 0.0;
+                onSubmit(title, value);
               },
               child: Text("Nova Transacao"),
               textColor: Colors.purple,
